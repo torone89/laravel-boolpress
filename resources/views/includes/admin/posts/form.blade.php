@@ -73,11 +73,11 @@
             @enderror
         </div>
     </div>
-    <div class="col-11">
+    {{-- <div class="col-11">
         <div class="form-group">
             <label for="image">Immagine</label><br />
             <input type="file" class="@error('title') is-invalid @enderror" id="image" name="image"
-                {{-- MESSAGGIO ERRORE --}}
+               
                 @error('image')
                 <div class="invalid-feedback">{{ $message }} </div>
             @enderror
@@ -88,7 +88,20 @@
                 src="{{ $post->image ? asset('storage/' . $post->image) : 'https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Begrippenlijst.svg' }}"
                 alt="{{ $post->image ? $post->title : 'placeholder' }}">
         </div>
+    </div> --}}
+    <div class="col-11">
+        <div class="form-group">
+            <label for="image">Immagine</label>
+            <input type="file" id="image" name="image">
+        </div>
     </div>
+    <div class="col-1 mt-4">
+        <img class="img-fluid"
+            src="{{ $post->image ? asset('storage/' . $post->image) : 'https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Begrippenlijst.svg' }}"
+            alt="{{ $post->image ? $post->title : 'placeholder' }}" id="preview" />
+    </div>
+
+
     <hr />
     <footer class="d-flex justify-content-between">
         <a class="btn btn-secondary" href="{{ route('admin.posts.index') }}">
