@@ -2,7 +2,7 @@
   <div class="card col-3 m-4 p-0">
     <img
       class="card-img-top img-fluid"
-      :src="post.image"
+      :src="`/storage/${post.image}`"
       alt="Card image cap"
     />
     <div class="card-body">
