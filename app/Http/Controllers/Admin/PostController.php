@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Mail\PostPublicationMail;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\Label;
 
@@ -96,6 +98,13 @@ class PostController extends Controller
         if (array_key_exists('tags', $data)) {
             $post->tags()->attach($data['tags']);
         }
+
+
+        // Creo il post, invio l'email all'autore
+
+        $mail = new PostPublicationMail($post);
+        $user_email = Auth::user()->email;
+        Mail::to($user_email)->send($mail);
 
         return redirect()->route('admin.posts.show', $post)
             ->with('message', "Post creato con successo")
