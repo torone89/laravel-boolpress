@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Post Pubblicato</title>
 </head>
 
 <body>
@@ -52,17 +52,6 @@
             @endif
         </div>
     </div>
-    <footer class="mt-5">
-        <div class="d-flex align-items-center justify-content-between">
-            <div>
-                <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">
-                    <i class="fa solid fa-rotate-left m-2"></i> Indietro
-                </a>
 
-
-            </div>
-
-            < </footer>
-</body>
 
 </html>
