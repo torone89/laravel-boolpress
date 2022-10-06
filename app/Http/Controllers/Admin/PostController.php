@@ -68,6 +68,7 @@ class PostController extends Controller
             ],
             [
                 'title.required' => 'Il titolo è obbligatorio',
+                'content.required' => 'Devi scrivere il contenuto del post',
                 'title.min' => 'Il titolo deve avere almeno :min caratteri',
                 'title.max' => 'Il titolo deve avere almeno :max caratteri',
                 'title.unique' => "Esiste già un post dal titolo $request->title",

@@ -93,6 +93,7 @@
         <div class="form-group">
             <label for="image">Immagine</label>
             <input type="file" id="image" name="image">
+
         </div>
     </div>
     <div class="col-1 mt-4">
@@ -104,7 +105,7 @@
 
     <hr />
     <footer class="d-flex justify-content-between">
-        <a class="btn btn-secondary" href="{{ route('admin.posts.index') }}">
+        <a class="btn btn-secondary mr-2" href="{{ route('admin.posts.index') }}">
             <i class="fa-solid fa-rotate-left mr-2"></i> Indietro
         </a>
         <button class="btn btn-success" type="submit">
