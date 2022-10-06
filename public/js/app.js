@@ -37379,11 +37379,17 @@ deleteForms.forEach(function (form) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var placeholder = "stringa https presa da google immagini";
+var placeholder = "'https://ralfvanveen.com/wp-content/uploads/2021/06/Placeholder-_-Begrippenlijst.svg";
 var image = document.getElementById('image');
 var preview = document.getElementById('preview');
 image.addEventListener('input', function () {
-  preview.src = image.value || placeholder;
+  if (image.files && image.files[0]) {
+    var reader = new FileReader();
+    reader.readAsDataURL(image.files[0]);
+    reader.addEventListener('load', function (event) {
+      preview.src = event.target.result;
+    });
+  } else preview.src = placeholder;
 });
 
 /***/ }),

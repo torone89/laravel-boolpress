@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +60,7 @@ class PostController extends Controller
             [
                 'title' => 'required|string|min:5|max:50|unique:posts',
                 'content' => 'required|string',
-                'image' => 'nullable|url',
+                'image' => 'nullable|image| mimes:jpeg,jpg,png',
                 'category_id' => 'nullable|exists:categories,id',
                 'tags' => 'nullable|exists:tags,id',
             ],
@@ -68,18 +69,30 @@ class PostController extends Controller
                 'title.min' => 'Il titolo deve avere almeno :min caratteri',
                 'title.max' => 'Il titolo deve avere almeno :max caratteri',
                 'title.unique' => "Esiste già un post dal titolo $request->title",
-                'image.url' => "Url dell' immagine non valido",
+                'image.image' => "Il file caricato non è di tipo immagine",
+                'image.mimes' => "Le immagini ammesse sono solo in formato .jpeg, .jpg o .png",
                 'category_id.exists' => "Non esiste una categoria associabile",
                 'tags.exists' => "Tag indicati non validi",
             ]
         );
 
         $data = $request->all();
+
         $post = new Post();
         $post->fill($data);
+
+
         $post->slug = Str::slug($post->title, '-');
         $post->user_id = Auth::id();
+
+        if (array_key_exists('image', $data)) {
+            $image_url = Storage::put('posts', $data['image']);
+            $post->image = $image_url;
+        }
+
+
         $post->save();
+
         if (array_key_exists('tags', $data)) {
             $post->tags()->attach($data['tags']);
         }
@@ -131,7 +144,7 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'min:5', 'max:50', Rule::unique('posts')->ignore($post->id)],
             'content' => 'required|string',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image| mimes:jpeg,jpg,png',
             'category_id' => 'nullable | exists:categories,id',
             'tags' => 'nullable|exists:tags,id',
 
@@ -141,7 +154,8 @@ class PostController extends Controller
             'title.min' => 'Il titolo deve avere almeno :min caratteri',
             'title.max' => 'Il titolo deve avere almeno :max caratteri',
             'title.unique' => "Esiste già un post dal titolo $request->title",
-            'image.url' => "Url dell'immagine non valido",
+            'image.image' => "Il file caricato non è di tipo immagine",
+            'image.mimes' => "Le immagini ammesse sono solo in formato .jpeg, .jpg o .png",
             'category_id.exists' => 'Non esiste una categoria associabile',
             'tags.exists' => "Tag indicati non validi",
         ]);
@@ -151,6 +165,11 @@ class PostController extends Controller
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
 
+
+        if (array_key_exists('image', $data)) {
+            $image_url = Storage::put('posts', $data['image']);
+            $post->image = $image_url;
+        }
 
         $post->update($data);
 
@@ -171,7 +190,11 @@ class PostController extends Controller
         if ($post->user_id !== Auth::id()) {
             return redirect()->route('admin.posts.index')->with('message', "Non sei autorizzato ad eliminare questo post")->with('type', "warning");
         }
+
+        if ($post->image) Storage::delete()($post->image);
+
         $post->delete();
+
         return redirect()->route('admin.posts.index')
             ->with('message', 'Il post è stato eliminato correttamente')
             ->with('type', 'success');
