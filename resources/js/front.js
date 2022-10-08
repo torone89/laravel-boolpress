@@ -12,8 +12,10 @@ window.Vue = require('vue');
 import router from './router.js'
 import App from './components/App.vue'
 import AppLoader from './components/AppLoader'
+import AppAlert from './components/AppAlert.vue'
 
 Vue.component('AppLoader', AppLoader)
+Vue.component('AppAlert', AppAlert)
 const root = new Vue({
     router,
     el: '#root',
