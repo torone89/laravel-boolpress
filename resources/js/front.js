@@ -11,7 +11,9 @@ window.Vue = require('vue');
 
 import router from './router.js'
 import App from './components/App.vue'
+import AppLoader from './components/AppLoader'
 
+Vue.component('AppLoader', AppLoader)
 const root = new Vue({
     router,
     el: '#root',

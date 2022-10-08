@@ -2156,10 +2156,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AppLoader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AppLoader.vue */ "./resources/js/components/AppLoader.vue");
-/* harmony import */ var _AppPagination_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../AppPagination.vue */ "./resources/js/components/AppPagination.vue");
-/* harmony import */ var _PostCard_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PostCard.vue */ "./resources/js/components/posts/PostCard.vue");
-
+/* harmony import */ var _AppPagination_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AppPagination.vue */ "./resources/js/components/AppPagination.vue");
+/* harmony import */ var _PostCard_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PostCard.vue */ "./resources/js/components/posts/PostCard.vue");
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2176,9 +2174,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   components: {
-    PostCard: _PostCard_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    AppLoader: _AppLoader_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    AppPagination: _AppPagination_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    PostCard: _PostCard_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    AppPagination: _AppPagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
     fetchPosts: function fetchPosts() {
@@ -55197,6 +55194,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
 /* harmony import */ var _components_App_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue");
+/* harmony import */ var _components_AppLoader__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/AppLoader */ "./resources/js/components/AppLoader.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -55207,6 +55205,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
+
+Vue.component('AppLoader', _components_AppLoader__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var root = new Vue({
   router: _router_js__WEBPACK_IMPORTED_MODULE_0__["default"],
   el: '#root',

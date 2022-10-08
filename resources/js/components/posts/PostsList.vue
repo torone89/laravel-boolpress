@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import AppLoader from "../AppLoader.vue";
 import AppPagination from "../AppPagination.vue";
 import PostCard from "./PostCard.vue";
 export default {
@@ -53,7 +52,7 @@ export default {
       },
     };
   },
-  components: { PostCard, AppLoader, AppPagination },
+  components: { PostCard, AppPagination },
 
   methods: {
     fetchPosts(page = 1) {
