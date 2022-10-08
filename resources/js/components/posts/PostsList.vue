@@ -6,20 +6,17 @@
     <app-loader v-if="isLoading" />
 
     <!-- Error -->
-
-    <div
-      class="alert alert-danger alert-dismissible fade show"
-      role="alert"
+    <AppAlert
       v-else-if="error"
+      type="info"
+      dismissible="true"
+      @close="error = null"
     >
       <p>{{ error }}</p>
-      <button type="button" class="close" @click="error = null">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+    </AppAlert>
 
     <div v-else>
-      <div v-if="posts.length">
+      <div v-if="posts && posts.length">
         <div class="row justify-content-between">
           <post-card v-for="post in posts" :key="post.id" :post="post" />
         </div>
@@ -70,7 +67,7 @@ export default {
           this.pagination.current = current_page;
           this.pagination.last = last_page;
         })
-        .catch((err) => {
+        .catch(() => {
           this.error = "Errore durante il fetch dei post";
         })
         .then(() => {
